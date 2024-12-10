@@ -1,0 +1,131 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+
+    <head>
+        <meta charset="utf-8" />
+        <title>{% block title %}Cybersecutity{% endblock %}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Формирование знаний о кибербезопасности через интерактивное упражнение" />
+        <meta name="keywords" content="кибербезпоасность, интернет, граммотность, информация" />
+        <meta name="author" content="Alexandr Belokrylov" />
+        <meta name="email" content="bel.am.2004@gmail.com" />
+        <meta name="website" content="https://shreethemes.in" />
+        <meta name="Version" content="v3.8.0" />
+        <!-- favicon -->
+        <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}">
+        <!-- Bootstrap -->
+        <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" type="text/css" />
+        <!-- Icons -->
+        <link href="{% static 'css/materialdesignicons.min.css' %}" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" href="https://unicons.iconscout.com/release/v3.0.6/css/line.css">
+        <!-- Slider -->
+        <link rel="stylesheet" href="{% static 'css/tiny-slider.css' %}"/>
+        <!-- Main Css -->
+        <link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css" id="theme-opt" />
+        <link href="{% static 'css/colors/default.css' %}" rel="stylesheet" id="color-opt">
+
+    </head>
+
+    <body>
+        <header id="topnav" class="defaultscroll sticky">
+            <div class="container">
+                <!-- End Logo container-->
+                <div class="menu-extras">
+                    <div class="menu-item">
+                        <!-- Mobile menu toggle-->
+                        <a class="navbar-toggle" id="isToggle" onclick="toggleMenu()">
+                            <div class="lines">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </a>
+                        <!-- End mobile menu toggle-->
+                    </div>
+                </div>
+        
+                <div id="navigation">
+                    <!-- Navigation Menu-->   
+                    <ul class="navigation-menu">
+                        <li><a href="{% url 'cybertest:main' %}" class="sub-menu-item">Домой</a></li>
+                        <li><a href="{% url 'cybertest:login' %}" class="sub-menu-item">Авторизация</a></li>
+                        <li><a href="{% url 'cybertest:signup' %}" class="sub-menu-item">Регистрация</a></li>
+                        <li><a href="{% url 'cybertest:test_page' 'cybersecurity' %}" class="sub-menu-item">Тест</a></li>
+                        <li><a href="{% url 'cybertest:about' %}" class="sub-menu-item">О нас</a></li>
+                        <li><a href="{% if request.user.is_authenticated %}{% url 'cybertest:profile' %}{%else%}{% url 'cybertest:login' %}{%endif%}" class="sub-menu-item">Профиль</a></li>
+                    </ul><!--end navigation menu-->
+                </div><!--end navigation-->
+            </div><!--end container-->
+        </header><!--end header-->
+        {% block content %}
+        {% endblock %}
+
+        <!-- Footer Start -->
+        <footer class="footer">    
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="footer-py-60">
+                            <div class="row">
+                                <div class="col-lg-4 col-12 mb-0 mb-md-4 pb-0 pb-md-2">
+                                    <a href="#" class="logo-footer">
+                                        <img src="{% static 'images/logo-light.png' %}" height="24" alt="">
+                                    </a>
+                                    <p class="mt-4">Start working with Landrick that can provide everything you need to generate awareness, drive traffic, connect.</p>
+                                </div><!--end col-->
+                                
+                                <div class="col-lg-4 col-md-4 col-12 mt-4 mt-sm-0 pt-2 pt-sm-0">
+                                    <h5 class="footer-head">Компания</h5>
+                                    <ul class="list-unstyled footer-list mt-4">
+                                        <li><a href="{% url 'cybertest:about' %}" class="text-foot"><i class="uil uil-angle-right-b me-1"></i> О нас</a></li>
+                                    </ul>
+                                </div><!--end col-->
+                                
+                                <div class="col-lg-4 col-md-4 col-12 mt-4 mt-sm-0 pt-2 pt-sm-0">
+                                    <h5 class="footer-head">Используемые ссылки</h5>
+                                    <ul class="list-unstyled footer-list mt-4">
+                                        <li><a href="#" class="text-foot"><i class="uil uil-angle-right-b me-1"></i> Телеграм</a></li>
+                                        <li><a href="https://vk.com/id518457155" class="text-foot"><i class="uil uil-angle-right-b me-1"></i> VK</a></li>
+                                        <li><a href="mailto:bel.am.2004@gmail.com" class="text-foot"><i class="uil uil-angle-right-b me-1"></i> e-mail</a></li>
+                                    </ul>
+                                </div><!--end col-->
+                            </div><!--end row-->
+                        </div>
+                    </div><!--end col-->
+                </div><!--end row-->
+            </div><!--end container-->
+
+            <div class="footer-py-30 footer-bar">
+                <div class="container text-center">
+                    <div class="row align-items-center">
+                        <div class="col-sm-6">
+                            <div class="text-sm-start">
+                                <p class="mb-0">© <script>document.write(new Date().getFullYear())</script> Landrick. Design with <i class="mdi mdi-heart text-danger"></i> by <a href="https://shreethemes.in/" target="_blank" class="text-reset">Shreethemes</a>.</p>
+                            </div>
+                        </div><!--end col-->
+                    </div><!--end row-->
+                </div><!--end container-->
+            </div>
+        </footer><!--end footer-->
+        <!-- Footer End -->
+
+        <!-- Back to top -->
+        <a href="#" onclick="topFunction()" id="back-to-top" class="back-to-top fs-5">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-up fea icon-sm icons align-middle"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
+        </a>
+        <!-- Back to top -->
+
+        <!-- javascript -->
+        <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+        <!-- SLIDER -->
+        <script src="{% static 'js/tiny-slider.js' %}"></script>
+        <!-- Icons -->
+        <script src="{% static 'js/feather.min.js' %}"></script>
+        <!-- Switcher -->
+        <script src="{% static 'js/switcher.js' %}"></script>
+        <!-- Main Js -->
+        <script src="{% static 'js/plugins.init.js' %}"></script>
+        <script src="{% static 'js/app.js' %}"></script>
+    </body>
+</html>

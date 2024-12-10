@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{{question.text|truncatewords:3}}{% endblock %}
+{% block content %}
+<section class="bg-half-170 bg-light d-table w-100">
+    <div class="container">
+        <div class="row mt-5 justify-content-center">
+            <div class="col-lg-12 text-center">
+                <div class="pages-heading">
+                    {% if request.user.is_authenticated %}
+                        {% if right %}
+                            <h4 class="title mb-0 text-success">Верно :)</h4>
+                        {% else %}
+                            <h4 class="title mb-0 text-danger">Не верно :(</h4>
+                        {% endif %}
+                    {% else %}
+                        Авторизуйтесь
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% if request.user.is_authenticated %}
+<section class="section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-9">
+                <div class="p-4 shadow rounded border">
+                    
+                    <ul class="list-unstyled">
+                        <li class="text-muted my-2 ms-3">
+                            <p>{{question.description}}</p>
+                        </li>
+                    </ul>
+
+                    <div class="mt-4">
+                        <a href="{% url 'cybertest:questions' test_name='cybersecurity' %}" class="btn btn-primary">Продолжить</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
+{% endblock %}

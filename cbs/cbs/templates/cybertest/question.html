@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{{question.text|truncatewords:3}}{% endblock %}
+{% block content %}
+<section class="bg-half-170 bg-light d-table w-100">
+    <div class="container">
+        <div class="row mt-5 justify-content-center">
+            <div class="col-lg-12 text-center">
+                <div class="pages-heading">
+                    <h4 class="title mb-0"> 
+                        {% if request.user.is_authenticated %}
+                            {{question.text}} 
+                        {% else %}
+                            Авторизуйтесь
+                        {% endif %}
+                    </h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% if request.user.is_authenticated %}
+<section class="section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-9">
+                <div class="p-4 shadow rounded border">
+                    <form action="{% url 'cybertest:check' test_name='cybersecurity' question_number=question.id %}" method="POST">
+                        {% csrf_token %}
+                        <ul class="list-unstyled">
+                            {% for answer in answers %}
+                            <li class="text-muted my-2 ms-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" value="{{answer.id}}">
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                        {{answer.text}}
+                                    </label>
+                                </div>
+                            </li>
+                            {% endfor %}
+                        </ul>
+
+                        <div class="mt-4">
+                            <button type="submit" class="btn btn-primary">Продолжить</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
+{% endblock %}
