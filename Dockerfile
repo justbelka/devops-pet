@@ -14,8 +14,8 @@ RUN chmod +x /entrypoint.sh
 
 ENTRYPOINT [ "/entrypoint.sh" ]
 
-RUN useradd -m runuser
+#RUN useradd -m runuser
 
-RUN chown -R runuser:runuser /app
+#RUN chown -R runuser:runuser /app
 
-USER runuser
+#USER runuser
