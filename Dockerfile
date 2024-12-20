@@ -12,10 +12,10 @@ COPY entrypoint.sh /entrypoint.sh
 
 RUN chmod +x /entrypoint.sh
 
-ENTRYPOINT [ "/entrypoint.sh" ]
+RUN useradd -m runuser
 
-#RUN useradd -m runuser
+RUN chown -R runuser:runuser /app
 
-#RUN chown -R runuser:runuser /app
+RUN chown -R runuser:runuser /entrypoint.sh
 
-#USER runuser
+USER runuser

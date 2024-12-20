@@ -1,5 +1,4 @@
 #!/bin/bash
-sleep 10
 echo "Выполнение миграций..."
 python /app/manage.py migrate --noinput
 
@@ -69,5 +68,5 @@ if not Test.objects.filter(name='cybersecurity').exists():
       Answer.objects.create(question=q10, text='Такое невозможно', is_right=False);
 " | python /app/manage.py shell
 
-echo "Запуск сервера..."
+echo "Миграции применены!"
 exec "$@"
