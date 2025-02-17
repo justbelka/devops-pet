@@ -1,5 +1,7 @@
 #!/bin/bash
 echo "Выполнение миграций..."
+sleep 5
+python /app/manage.py makemigrations
 python /app/manage.py migrate --noinput
 
 echo "Создание нового суперпользователя..."
@@ -69,4 +71,5 @@ if not Test.objects.filter(name='cybersecurity').exists():
 " | python /app/manage.py shell
 
 echo "Миграции применены!"
+python /app/manage.py runserver 0.0.0.0:80
 exec "$@"

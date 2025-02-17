@@ -1,0 +1,49 @@
+services:
+  db:
+    container_name: justbelkaDBImage
+    image: postgres:15
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - ${DB_PORT}:5432
+    env_file:
+      - .env
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_INITDB_ARGS: "-A scram-sha-256"
+    restart: always
+    networks:
+      custom_network:
+        ipv4_address: 10.11.0.11
+
+  web:
+    container_name: justbelkaWebImage
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 80:80
+    depends_on:
+      - db
+    command: /entrypoint.sh
+#    command: "sh -c 'while true; do sleep 60; done;'"
+    volumes:
+      - web_data:/app
+    env_file:
+      - .env
+    networks:
+      custom_network:
+        ipv4_address: 10.11.0.10
+
+volumes:
+  postgres_data: {}
+  web_data: {}
+
+networks:
+  custom_network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.11.0.0/24
